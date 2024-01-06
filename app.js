@@ -7,5 +7,7 @@ form.addEventListener("submit", function (e) {
   const newTodo = document.createElement("li");
   newTodo.innerText = todoInput.value;
 
-  todoContent.append(newTodo);
+  todoContent.appendChild(newTodo);
+
+  todoInput.value = "";
 });
