@@ -20,13 +20,20 @@ for (let todo of todoArr) {
   todoContent.appendChild(newTodoDiv);
 }
 
-// console.log(localStorage);
+console.log(todoArr);
+console.log(localStorage);
 
 todoContent.addEventListener("click", function (e) {
   if (e.target.tagName === "BUTTON") {
     e.target.parentElement.remove();
-    // console.log(e.target.parentElement.querySelector("li").innerText);
-    // localStorage.clear();
+
+    let removeTodoIndex = todoArr.indexOf(
+      e.target.parentElement.querySelector("li").innerText
+    );
+    console.log(removeTodoIndex);
+
+    todoArr.splice(removeTodoIndex, 1);
+    localStorage.setItem("todos", JSON.stringify(todoArr));
   } else if (e.target.tagName === "LI") {
     e.target.classList.toggle("crossed");
   }
