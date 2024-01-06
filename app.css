@@ -60,6 +60,10 @@ ul button {
 }
 
 
+.crossed{
+    text-decoration: line-through;
+}
+
 
 
 #formContainer {

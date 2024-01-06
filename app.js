@@ -6,6 +6,8 @@ const removeButtons = document.querySelectorAll("ul button");
 todoContent.addEventListener("click", function (e) {
   if (e.target.tagName === "BUTTON") {
     e.target.parentElement.remove();
+  } else if (e.target.tagName === "LI") {
+    e.target.classList.toggle("crossed");
   }
 });
 
