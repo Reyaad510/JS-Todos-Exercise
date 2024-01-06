@@ -18,21 +18,45 @@ h1 {
     font-size: 2rem;
 }
 
-#todoContainer {
+/* #todoContainer {
     display: flex;
     justify-content: center;
     text-align: 'center';
-}
+} */
 
 ul {
+display: flex;
+justify-content: center;
+flex-direction: column;
+width: 100%;
+}
 
+.liBtn {
+  display: flex;
+  margin-top: 1rem;
+  flex: 1 100%;
 
 }
 
 li {
     list-style-type: none;
     margin-left: -2rem;
+    line-height: 2rem;
+    flex-grow: 1;
 
+}
+
+ul button {
+    background-color: #E95965;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-left: 5rem;
+    border: none;
+      font-weight: 500;
+      font-size: 1rem;
+      color: rgb(var(--pure-material-onprimary-rgb, 255, 255, 255));
+    
 }
 
 
@@ -47,6 +71,7 @@ form {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    
 }
 
 input {
@@ -62,7 +87,7 @@ input {
     border-radius: 6px;
   }
 
-button {
+form button {
  
     box-sizing: border-box;
     border: none;
