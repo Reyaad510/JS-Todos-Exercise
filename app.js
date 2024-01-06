@@ -19,13 +19,16 @@ form.addEventListener("submit", function (e) {
   newTodo.innerText = todoInput.value;
   removeBtn.innerText = "X";
 
-  const newLiBtn = newTodoDiv.appendChild(newTodo);
-  newTodoDiv.appendChild(newLiBtn);
-  newTodoDiv.appendChild(removeBtn);
-  console.log(newTodoDiv);
+  if (!todoInput.value) {
+    return;
+  } else {
+    const newLiBtn = newTodoDiv.appendChild(newTodo);
+    newTodoDiv.appendChild(newLiBtn);
+    newTodoDiv.appendChild(removeBtn);
 
-  newTodoDiv.classList.add("liBtn");
-  todoContent.appendChild(newTodoDiv);
+    newTodoDiv.classList.add("liBtn");
+    todoContent.appendChild(newTodoDiv);
 
-  todoInput.value = "";
+    todoInput.value = "";
+  }
 });
