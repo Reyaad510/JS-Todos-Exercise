@@ -1,11 +1,41 @@
 * {
+    
     text-align: center;
     font-family: "Mochiy Pop One";
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    height: 100svh;
+    overflow: hidden;
 }
 
 h1 {
     font-size: 2rem;
 }
+
+#todoContainer {
+    display: flex;
+    justify-content: center;
+    text-align: 'center';
+}
+
+ul {
+
+
+}
+
+li {
+    list-style-type: none;
+    margin-left: -2rem;
+
+}
+
+
 
 
 #formContainer {
@@ -56,7 +86,7 @@ button {
       system-ui,
       -apple-system
     );
-    font-size: 14px;
+    font-size: 1rem;
     font-weight: 500;
     line-height: 36px;
     overflow: hidden;
