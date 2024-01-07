@@ -45,6 +45,7 @@ li {
     margin-left: -2rem;
     line-height: 2rem;
     flex-grow: 1;
+    cursor: pointer;
 
 }
 
@@ -64,6 +65,7 @@ ul button {
 
 .crossed{
     text-decoration: line-through;
+    opacity: 50%;
 }
 
 

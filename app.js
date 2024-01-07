@@ -2,15 +2,21 @@ const form = document.querySelector("#add-todo");
 const todoInput = document.querySelector('input[name="todo"]');
 const todoContent = document.querySelector("#todoContent");
 const removeButtons = document.querySelectorAll("ul button");
-let todoArr = JSON.parse(localStorage.getItem("todos")) || [];
 
-for (let todo of todoArr) {
+let todoObj = JSON.parse(localStorage.getItem("todos")) || [];
+
+for (let todo of todoObj) {
   const newTodoDiv = document.createElement("div");
   const newTodo = document.createElement("li");
   const removeBtn = document.createElement("button");
 
   const newLiBtn = newTodoDiv.appendChild(newTodo);
-  newTodo.innerText = todo;
+  newTodo.innerText = todo.text;
+
+  if (todo.checked === "true") {
+    newTodo.classList.add("crossed");
+  }
+
   removeBtn.innerText = "X";
 
   newTodoDiv.appendChild(newLiBtn);
@@ -20,22 +26,38 @@ for (let todo of todoArr) {
   todoContent.appendChild(newTodoDiv);
 }
 
-console.log(todoArr);
-console.log(localStorage);
-
 todoContent.addEventListener("click", function (e) {
   if (e.target.tagName === "BUTTON") {
     e.target.parentElement.remove();
 
-    let removeTodoIndex = todoArr.indexOf(
-      e.target.parentElement.querySelector("li").innerText
-    );
-    console.log(removeTodoIndex);
-
-    todoArr.splice(removeTodoIndex, 1);
-    localStorage.setItem("todos", JSON.stringify(todoArr));
+    for (let i = 0; i < todoObj.length; i++) {
+      if (
+        e.target.parentElement.querySelector("li").innerText === todoObj[i].text
+      ) {
+        todoObj.splice(i, 1);
+        localStorage.setItem("todos", JSON.stringify(todoObj));
+      }
+    }
   } else if (e.target.tagName === "LI") {
     e.target.classList.toggle("crossed");
+    if (e.target.className === "crossed") {
+      todoObj.find(function (todoText) {
+        if (todoText.text === e.target.innerText) {
+          console.log(e.target.innerText);
+          todoText.checked = "true";
+          console.log(todoText.checked);
+          localStorage.setItem("todos", JSON.stringify(todoObj));
+        }
+      });
+    } else {
+      todoObj.find(function (todoText) {
+        if (todoText.text === e.target.innerText) {
+          todoText.checked = "false";
+          console.log(todoText.checked);
+          localStorage.setItem("todos", JSON.stringify(todoObj));
+        }
+      });
+    }
   }
 });
 
@@ -58,8 +80,12 @@ form.addEventListener("submit", function (e) {
     newTodoDiv.classList.add("liBtn");
     todoContent.appendChild(newTodoDiv);
 
-    todoArr.push(todoInput.value);
-    localStorage.setItem("todos", JSON.stringify(todoArr));
+    todoObj.push({
+      text: todoInput.value,
+      checked: false,
+    });
+    localStorage.setItem("todos", JSON.stringify(todoObj));
+    console.log(localStorage);
 
     todoInput.value = "";
   }
