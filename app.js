@@ -31,25 +31,7 @@ todoContent.addEventListener("click", function (e) {
   if (e.target.tagName === "BUTTON") {
     removeToDo(e);
   } else if (e.target.tagName === "LI") {
-    e.target.classList.toggle("crossed");
-    if (e.target.className === "crossed") {
-      todoObj.find(function (todoText) {
-        if (todoText.text === e.target.innerText) {
-          console.log(e.target.innerText);
-          todoText.checked = "true";
-          console.log(todoText.checked);
-          localStorage.setItem("todos", JSON.stringify(todoObj));
-        }
-      });
-    } else {
-      todoObj.find(function (todoText) {
-        if (todoText.text === e.target.innerText) {
-          todoText.checked = "false";
-          console.log(todoText.checked);
-          localStorage.setItem("todos", JSON.stringify(todoObj));
-        }
-      });
-    }
+    completedTask(e);
   }
 });
 
@@ -83,7 +65,7 @@ form.addEventListener("submit", function (e) {
   }
 });
 
-// Remove Element and update local storage to reflect that change
+// Remove Element and update local storage to reflect that change on window reload
 const removeToDo = (e) => {
   e.target.parentElement.remove();
 
@@ -94,5 +76,25 @@ const removeToDo = (e) => {
       todoObj.splice(i, 1);
       localStorage.setItem("todos", JSON.stringify(todoObj));
     }
+  }
+};
+
+// Updates a task to be completed and update localstorage to reflect that change on window reload
+const completedTask = (e) => {
+  e.target.classList.toggle("crossed");
+  if (e.target.className === "crossed") {
+    todoObj.find(function (todoText) {
+      if (todoText.text === e.target.innerText) {
+        todoText.checked = "true";
+        localStorage.setItem("todos", JSON.stringify(todoObj));
+      }
+    });
+  } else {
+    todoObj.find(function (todoText) {
+      if (todoText.text === e.target.innerText) {
+        todoText.checked = "false";
+        localStorage.setItem("todos", JSON.stringify(todoObj));
+      }
+    });
   }
 };
