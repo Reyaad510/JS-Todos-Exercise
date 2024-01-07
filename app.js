@@ -5,6 +5,7 @@ const removeButtons = document.querySelectorAll("ul button");
 
 let todoObj = JSON.parse(localStorage.getItem("todos")) || [];
 
+// Initialized Page on reload
 for (let todo of todoObj) {
   const newTodoDiv = document.createElement("div");
   const newTodo = document.createElement("li");
@@ -28,16 +29,7 @@ for (let todo of todoObj) {
 
 todoContent.addEventListener("click", function (e) {
   if (e.target.tagName === "BUTTON") {
-    e.target.parentElement.remove();
-
-    for (let i = 0; i < todoObj.length; i++) {
-      if (
-        e.target.parentElement.querySelector("li").innerText === todoObj[i].text
-      ) {
-        todoObj.splice(i, 1);
-        localStorage.setItem("todos", JSON.stringify(todoObj));
-      }
-    }
+    removeToDo(e);
   } else if (e.target.tagName === "LI") {
     e.target.classList.toggle("crossed");
     if (e.target.className === "crossed") {
@@ -90,3 +82,17 @@ form.addEventListener("submit", function (e) {
     todoInput.value = "";
   }
 });
+
+// Remove Element and update local storage to reflect that change
+const removeToDo = (e) => {
+  e.target.parentElement.remove();
+
+  for (let i = 0; i < todoObj.length; i++) {
+    if (
+      e.target.parentElement.querySelector("li").innerText === todoObj[i].text
+    ) {
+      todoObj.splice(i, 1);
+      localStorage.setItem("todos", JSON.stringify(todoObj));
+    }
+  }
+};
